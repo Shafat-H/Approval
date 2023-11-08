@@ -1,0 +1,240 @@
+GO
+/****** Object:  Table [apro].[tblApprovalConfigHeader]    Script Date: 08-Nov-23 10:09:01 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [apro].[tblApprovalConfigHeader](
+	[ApprovalConfigId] [bigint] IDENTITY(1,1) NOT NULL,
+	[intPipelineId] [bigint] NOT NULL,
+	[strStageName] [varchar](200) NOT NULL,
+	[intSerial] [int] NOT NULL,
+	[isAnyOrder] [bit] NOT NULL,
+	[isInSequence] [bit] NOT NULL,
+	[intAnyUsers] [int] NOT NULL,
+	[intActionBy] [bigint] NOT NULL,
+	[dteLastAction] [datetime] NOT NULL,
+	[isActive] [bit] NOT NULL,
+	[isSupervisor] [bit] NOT NULL,
+	[isLinemanger] [bit] NOT NULL,
+ CONSTRAINT [PK_tblApprovalConfigHeader] PRIMARY KEY CLUSTERED 
+(
+	[ApprovalConfigId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [apro].[tblApprovalConfigRow]    Script Date: 08-Nov-23 10:09:01 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [apro].[tblApprovalConfigRow](
+	[RowId] [bigint] IDENTITY(1,1) NOT NULL,
+	[ApprovalConfigId] [bigint] NOT NULL,
+	[intUserTypeId] [bigint] NULL,
+	[strUserTypeName] [nvarchar](50) NULL,
+	[intUserId] [bigint] NOT NULL,
+	[strUserName] [nvarchar](50) NOT NULL,
+	[intAuthorizationTypeId] [bigint] NULL,
+	[strAuthorizeType] [nvarchar](50) NOT NULL,
+	[intSequenceId] [int] NOT NULL,
+	[isActive] [bit] NOT NULL,
+ CONSTRAINT [PK_tblApprovalConfigRow_1] PRIMARY KEY CLUSTERED 
+(
+	[RowId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [apro].[tblApprovalPipeline]    Script Date: 08-Nov-23 10:09:01 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [apro].[tblApprovalPipeline](
+	[intPipelineId] [bigint] IDENTITY(1,1) NOT NULL,
+	[strPipelineName] [nvarchar](50) NOT NULL,
+	[intSuperUserId] [bigint] NOT NULL,
+	[numThreshold] [numeric](18, 0) NOT NULL,
+	[intAccountId] [bigint] NULL,
+	[intUnitId] [bigint] NULL,
+	[intActivityFeatureId] [int] NOT NULL,
+	[strActivityFeatureName] [nvarchar](50) NOT NULL,
+	[isActive] [bit] NOT NULL,
+	[intModuleId] [bigint] NULL,
+	[strModuleName] [nvarchar](50) NULL,
+	[strUserType] [nvarchar](50) NULL,
+	[strRemarks] [nvarchar](250) NULL,
+	[dteCreatedDate] [datetime] NOT NULL,
+ CONSTRAINT [PK_tblApprovalPipeline] PRIMARY KEY CLUSTERED 
+(
+	[intPipelineId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [apro].[tblApprovalTransectionHeader]    Script Date: 08-Nov-23 10:09:01 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [apro].[tblApprovalTransectionHeader](
+	[intApprovalTransectionId] [bigint] IDENTITY(1,1) NOT NULL,
+	[intPipeLineId] [bigint] NULL,
+	[isApproved] [bit] NULL,
+	[intAccountId] [bigint] NULL,
+	[intUnitId] [bigint] NULL,
+	[dteLastActionDateTime] [datetime] NOT NULL,
+	[dteServerDateTime] [datetime] NOT NULL,
+	[isActive] [bit] NOT NULL,
+	[ApprovalOrderTypeId] [bigint] NULL,
+	[ApprovalOrderTypeName] [varchar](100) NULL,
+	[ModuleId] [bigint] NULL,
+	[ModuleName] [varchar](100) NULL,
+	[FeatureId] [bigint] NULL,
+	[FeatureName] [varchar](100) NULL,
+	[intReferenceId] [bigint] NULL,
+	[strReferenceCode] [varchar](100) NULL,
+	[intStageId] [bigint] NULL,
+	[isSupervisor] [bit] NOT NULL,
+	[isLinemanger] [bit] NOT NULL,
+	[intRequestEmployeeId] [bigint] NULL,
+ CONSTRAINT [PK_tblApprovalTransectionHeader] PRIMARY KEY CLUSTERED 
+(
+	[intApprovalTransectionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [apro].[tblApprovalTransectionLogHead]    Script Date: 08-Nov-23 10:09:01 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [apro].[tblApprovalTransectionLogHead](
+	[intId] [bigint] IDENTITY(1,1) NOT NULL,
+	[intApprovalTransectionHeadId] [bigint] NOT NULL,
+	[intApprovalTransectionRowId] [bigint] NOT NULL,
+	[intUserId] [bigint] NOT NULL,
+	[strUserName] [varchar](100) NULL,
+	[intReferenceId] [bigint] NOT NULL,
+	[strReferenceCode] [varchar](100) NULL,
+	[strRemarks] [varchar](500) NULL,
+	[dteCreatedDate] [datetime] NOT NULL,
+	[intType] [bigint] NULL,
+	[strType] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[intId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [apro].[tblApprovalTransectionLogRow]    Script Date: 08-Nov-23 10:09:01 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [apro].[tblApprovalTransectionLogRow](
+	[intRowId] [bigint] IDENTITY(1,1) NOT NULL,
+	[intApprovalTransectionHeadLogId] [bigint] NOT NULL,
+	[intItemId] [bigint] NOT NULL,
+	[strItemName] [varchar](100) NULL,
+	[strRemarks] [varchar](100) NULL,
+	[numQuantity] [numeric](18, 6) NULL,
+	[monRate] [numeric](18, 6) NULL,
+	[monValue] [numeric](18, 6) NULL,
+	[dteCreatedDate] [datetime] NOT NULL,
+ CONSTRAINT [PK__tblAppro__6A2A8C9C1F5A7389] PRIMARY KEY CLUSTERED 
+(
+	[intRowId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [apro].[tblApprovalTransectionRow]    Script Date: 08-Nov-23 10:09:01 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [apro].[tblApprovalTransectionRow](
+	[intRowId] [bigint] IDENTITY(1,1) NOT NULL,
+	[intApprovalTransectionId] [bigint] NOT NULL,
+	[intUserId] [bigint] NULL,
+	[strUserName] [nvarchar](50) NULL,
+	[numThreshold] [numeric](18, 2) NULL,
+	[intSequenceId] [int] NULL,
+	[isApprove] [bit] NOT NULL,
+	[isReject] [bit] NULL,
+ CONSTRAINT [PK_tblApprovalTransectionRow] PRIMARY KEY CLUSTERED 
+(
+	[intRowId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [apro].[tblApprovalConfigHeader] ADD  CONSTRAINT [DF_tblApprovalConfigHeader_isAnyOrder]  DEFAULT ((0)) FOR [isAnyOrder]
+GO
+ALTER TABLE [apro].[tblApprovalConfigHeader] ADD  CONSTRAINT [DF_tblApprovalConfigHeader_isInSequence]  DEFAULT ((0)) FOR [isInSequence]
+GO
+ALTER TABLE [apro].[tblApprovalConfigHeader] ADD  CONSTRAINT [DF_tblApprovalConfigHeader_AnyUsers]  DEFAULT ((0)) FOR [intAnyUsers]
+GO
+ALTER TABLE [apro].[tblApprovalConfigHeader] ADD  CONSTRAINT [DF_tblApprovalConfigHeader_isActive]  DEFAULT ((1)) FOR [isActive]
+GO
+ALTER TABLE [apro].[tblApprovalConfigHeader] ADD  DEFAULT ((0)) FOR [isSupervisor]
+GO
+ALTER TABLE [apro].[tblApprovalConfigHeader] ADD  DEFAULT ((0)) FOR [isLinemanger]
+GO
+ALTER TABLE [apro].[tblApprovalPipeline] ADD  CONSTRAINT [DF__tblApprov__dteCr__398D8EEE]  DEFAULT (getdate()) FOR [dteCreatedDate]
+GO
+ALTER TABLE [apro].[tblApprovalTransectionHeader] ADD  CONSTRAINT [DF_tblApprovalTransectionHeader_ServerDateTime]  DEFAULT (getdate()) FOR [dteServerDateTime]
+GO
+ALTER TABLE [apro].[tblApprovalTransectionHeader] ADD  CONSTRAINT [DF_tblApprovalTransectionHeader_isActive]  DEFAULT ((1)) FOR [isActive]
+GO
+ALTER TABLE [apro].[tblApprovalTransectionHeader] ADD  CONSTRAINT [DF__tblApprov__intSt__5B252391]  DEFAULT ((0)) FOR [intStageId]
+GO
+ALTER TABLE [apro].[tblApprovalTransectionHeader] ADD  CONSTRAINT [DF__tblApprov__isSup__6696D63D]  DEFAULT ((0)) FOR [isSupervisor]
+GO
+ALTER TABLE [apro].[tblApprovalTransectionHeader] ADD  CONSTRAINT [DF__tblApprov__isLin__678AFA76]  DEFAULT ((0)) FOR [isLinemanger]
+GO
+ALTER TABLE [apro].[tblApprovalTransectionLogHead] ADD  DEFAULT (getdate()) FOR [dteCreatedDate]
+GO
+ALTER TABLE [apro].[tblApprovalTransectionLogRow] ADD  CONSTRAINT [DF__tblApprov__numQu__0DB0A35E]  DEFAULT ((0)) FOR [numQuantity]
+GO
+ALTER TABLE [apro].[tblApprovalTransectionLogRow] ADD  CONSTRAINT [DF__tblApprov__monRa__0EA4C797]  DEFAULT ((0)) FOR [monRate]
+GO
+ALTER TABLE [apro].[tblApprovalTransectionLogRow] ADD  CONSTRAINT [DF__tblApprov__monVa__0F98EBD0]  DEFAULT ((0)) FOR [monValue]
+GO
+ALTER TABLE [apro].[tblApprovalTransectionLogRow] ADD  CONSTRAINT [DF__tblApprov__dteCr__108D1009]  DEFAULT (getdate()) FOR [dteCreatedDate]
+GO
+ALTER TABLE [apro].[tblApprovalTransectionRow] ADD  DEFAULT ((0)) FOR [isReject]
+GO
+ALTER TABLE [apro].[tblApprovalConfigHeader]  WITH CHECK ADD  CONSTRAINT [FK_tblApprovalConfigHeader_tblApprovalPipeline] FOREIGN KEY([intPipelineId])
+REFERENCES [apro].[tblApprovalPipeline] ([intPipelineId])
+GO
+ALTER TABLE [apro].[tblApprovalConfigHeader] CHECK CONSTRAINT [FK_tblApprovalConfigHeader_tblApprovalPipeline]
+GO
+ALTER TABLE [apro].[tblApprovalConfigRow]  WITH CHECK ADD  CONSTRAINT [FK_tblApprovalConfigRow_tblApprovalConfigHeader] FOREIGN KEY([ApprovalConfigId])
+REFERENCES [apro].[tblApprovalConfigHeader] ([ApprovalConfigId])
+GO
+ALTER TABLE [apro].[tblApprovalConfigRow] CHECK CONSTRAINT [FK_tblApprovalConfigRow_tblApprovalConfigHeader]
+GO
+ALTER TABLE [apro].[tblApprovalTransectionHeader]  WITH CHECK ADD  CONSTRAINT [FK_tblApprovalTransectionHeader_tblApprovalPipeline] FOREIGN KEY([intPipeLineId])
+REFERENCES [apro].[tblApprovalPipeline] ([intPipelineId])
+GO
+ALTER TABLE [apro].[tblApprovalTransectionHeader] CHECK CONSTRAINT [FK_tblApprovalTransectionHeader_tblApprovalPipeline]
+GO
+ALTER TABLE [apro].[tblApprovalTransectionLogHead]  WITH CHECK ADD  CONSTRAINT [FK_tblApprovalTransectionLogHead_tblApprovalTransectionHeader] FOREIGN KEY([intApprovalTransectionHeadId])
+REFERENCES [apro].[tblApprovalTransectionHeader] ([intApprovalTransectionId])
+GO
+ALTER TABLE [apro].[tblApprovalTransectionLogHead] CHECK CONSTRAINT [FK_tblApprovalTransectionLogHead_tblApprovalTransectionHeader]
+GO
+ALTER TABLE [apro].[tblApprovalTransectionLogHead]  WITH CHECK ADD  CONSTRAINT [FK_tblApprovalTransectionLogHead_tblApprovalTransectionRow] FOREIGN KEY([intApprovalTransectionRowId])
+REFERENCES [apro].[tblApprovalTransectionRow] ([intRowId])
+GO
+ALTER TABLE [apro].[tblApprovalTransectionLogHead] CHECK CONSTRAINT [FK_tblApprovalTransectionLogHead_tblApprovalTransectionRow]
+GO
+ALTER TABLE [apro].[tblApprovalTransectionLogRow]  WITH CHECK ADD  CONSTRAINT [FK_tblApprovalTransectionLogRow_tblApprovalTransectionLogHead] FOREIGN KEY([intApprovalTransectionHeadLogId])
+REFERENCES [apro].[tblApprovalTransectionLogHead] ([intId])
+GO
+ALTER TABLE [apro].[tblApprovalTransectionLogRow] CHECK CONSTRAINT [FK_tblApprovalTransectionLogRow_tblApprovalTransectionLogHead]
+GO
+ALTER TABLE [apro].[tblApprovalTransectionRow]  WITH CHECK ADD  CONSTRAINT [FK_tblApprovalTransectionRow_tblApprovalTransectionHeader] FOREIGN KEY([intApprovalTransectionId])
+REFERENCES [apro].[tblApprovalTransectionHeader] ([intApprovalTransectionId])
+GO
+ALTER TABLE [apro].[tblApprovalTransectionRow] CHECK CONSTRAINT [FK_tblApprovalTransectionRow_tblApprovalTransectionHeader]
+GO
